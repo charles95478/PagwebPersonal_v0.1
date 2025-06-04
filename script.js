@@ -1,13 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const links = document.querySelectorAll('nav a');
-    links.forEach(link => {
-        link.addEventListener('click', function() {
-            links.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
 
-    window.addEventListener('scroll', () => {
+    function updateActive() {
         let current = '';
         document.querySelectorAll('main section').forEach(sec => {
             const top = window.scrollY;
@@ -23,5 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.classList.add('active');
             }
         });
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', function() {
+            links.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
     });
+
+    window.addEventListener('scroll', updateActive);
+    updateActive();
 });
